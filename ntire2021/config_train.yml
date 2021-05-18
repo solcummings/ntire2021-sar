@@ -1,0 +1,73 @@
+# Training Settings
+
+seed: 1
+deterministic: True
+amp: True
+
+epochs: 300
+load_checkpoint: &checkpoint False
+save_dir: './labs/'
+
+model_name: 'mobilenet'
+model_args:
+    classes: 10
+    img_channels: 1
+    version: 'v3_large'
+    arch_config:
+        stem_downsample: False
+    pretrained: True
+
+train_dataset_args:
+    phase: 'train'
+    img_file: &img './data/train/SAR_images.npy'
+    label_file: &label './data/train/SAR_labels.npy'
+    mean_std_file: &stat './data/train/csv/mean_std.csv'
+    class_list: [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]
+    patchsize: &train_patchsize 56
+    val_ratio: &ratio 0.2
+    batch_size: 30
+    shuffle: True
+    num_workers: &num_workers 6
+    sampling_method: 'undersample'
+    sampling_size: 1392
+    transforms_args:
+        rotation: {p: 0.5}
+        vflip: {p: 0.5}
+        hflip: {p: 0.5}
+        cutmix: {p: 0.5, cutsize_min: 20, cutsize_max: 20, centersize: 32,
+                 mix_labels: False}
+        randomcrop: {patchsize: *train_patchsize}
+
+val_dataset_args:
+    phase: 'val'
+    img_file: *img
+    label_file: *label
+    mean_std_file: *stat
+    class_list: [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]
+    patchsize: *train_patchsize
+    val_ratio: *ratio
+    batch_size: 100
+    shuffle: False
+    num_workers: *num_workers
+    sampling_method: 'undersample'
+    sampling_size: 348
+    transforms_args:
+        centercrop: {patchsize: *train_patchsize}
+
+loss_name: 'ce'
+loss_args:
+
+optimizer_name: 'sgd'
+optimizer_args:
+    lr: 1e-3
+    weight_decay: 1e-3
+    momentum: 0.9
+    nesterov: True
+
+scheduler_name: 'cosine_wr'
+scheduler_args:
+    T_0: 5
+    T_mult: 2
+    eta_min: 1e-5
+    verbose: True
+

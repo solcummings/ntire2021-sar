@@ -1,0 +1,31 @@
+# Predicting Settings
+
+seed: 0
+deterministic: True
+amp: True
+
+model_name: 'mobilenet'
+model_args:
+    classes: 10
+    img_channels: 1
+    version: 'v3_large'
+    arch_config:
+        stem_downsample: False
+    pretrained: './labs/best_val_f1.pth'
+
+save_dir: './results/test/'
+
+dataset_args:
+    phase: 'test'
+    img_file: './data/source/test_images/'
+    mean_std_file: './data/train/csv/mean_std.csv'
+    patchsize: &patchsize 56
+    batch_size: 30
+    shuffle: False
+    num_workers: 6
+    transforms_args:
+        rotation: {p: 1.}
+        vflip: {p: 1.}
+        hflip: {p: 1.}
+        centercrop: {patchsize: *patchsize}
+

@@ -1,0 +1,8 @@
+__pycache__/
+ntire2021/data/source/
+ntire2021/labs/
+ntire2021/results/
+
+*.swp
+*.pth
+*.npy
