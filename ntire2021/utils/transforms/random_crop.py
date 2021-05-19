@@ -29,5 +29,5 @@ class RandomCrop(Transform):
         h, w = array.shape[-2], array.shape[-1]
         h_start = int(np.floor((h - h_cropsize) * h_coef))
         w_start = int(np.floor((w - w_cropsize) * w_coef))
-        return array[..., h_start:h_start+h_cropsize, w_start:w_start+w_cropsize].copy()
+        return array.copy()[..., h_start:h_start+h_cropsize, w_start:w_start+w_cropsize]
 

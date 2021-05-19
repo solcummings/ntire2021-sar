@@ -40,24 +40,29 @@ class Cutmix(Transform):
     @staticmethod
     def cut(array, mix_array, h_cutsize, w_cutsize, h_coef, w_coef, centersize):
         h, w = array.shape[-2], array.shape[-1]
+        output_array = array.copy()
         if centersize > 0:
             center_h_start = int(np.floor(h / 2) - np.floor(centersize / 2))
             center_w_start = int(np.floor(w / 2) - np.floor(centersize / 2))
-            center_array = array[
+            center_array = array.copy()[
                         ...,
                         center_h_start:center_h_start+centersize,
                         center_w_start:center_w_start+centersize,
-            ].copy()
+            ]
         mix_array = RandomCrop.crop(mix_array, h_cutsize, w_cutsize, h_coef, w_coef)
 
         h_start = int(np.floor((h - h_cutsize) * h_coef))
         w_start = int(np.floor((w - w_cutsize) * w_coef))
-        array[..., h_start:h_start+h_cutsize, w_start:w_start+w_cutsize] = mix_array
+        output_array[
+                ...,
+                h_start:h_start+h_cutsize,
+                w_start:w_start+w_cutsize,
+        ] = mix_array
         if centersize > 0:
-            array[
+            output_array[
                     ...,
                     center_h_start:center_h_start+centersize,
                     center_w_start:center_w_start+centersize,
             ] = center_array
-        return array
+        return output_array
 

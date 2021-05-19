@@ -15,5 +15,5 @@ class HorizontalFlip(Transform):
 
     @staticmethod
     def flip(array):
-        return array[..., ::-1].copy()
+        return array.copy()[..., ::-1]
 

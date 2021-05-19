@@ -31,7 +31,7 @@ class Pad(Transform):
         pad_w = max(int(np.ceil((patchsize - w) / 2)), 0)
         # pad for arrays with channels
         pad_tuple = ((0, 0),) * (array.ndim - 2) + ((pad_h, pad_h), (pad_w, pad_w))
-        array = np.pad(array, pad_tuple, mode=mode)
+        array = np.pad(array.copy(), pad_tuple, mode=mode)
         array = array[..., :patchsize, :patchsize]
         return array
 

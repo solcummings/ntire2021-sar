@@ -18,5 +18,5 @@ class Rotation(Transform):
 
     @staticmethod
     def rotate(array, k):
-        return np.rot90(array, k=k, axes=(-1, -2)).copy()
+        return np.rot90(array.copy(), k=k, axes=(-1, -2))
 

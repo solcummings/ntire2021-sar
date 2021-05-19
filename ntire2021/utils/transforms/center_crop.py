@@ -27,5 +27,5 @@ class CenterCrop(Transform):
         h, w = array.shape[-2], array.shape[-1]
         h_start = (h - h_cropsize) // 2
         w_start = (w - w_cropsize) // 2
-        return array[..., h_start:h_start+h_cropsize, w_start:w_start+w_cropsize].copy()
+        return array.copy()[..., h_start:h_start+h_cropsize, w_start:w_start+w_cropsize]
 
