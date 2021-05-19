@@ -71,30 +71,40 @@ class Training:
                 val_loss, val_metrics_dict = \
                         self.iterate_dataloader('val', self.val_dataloader)
 
-                scheduler_update_basis = val_loss if isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau) else None
+                scheduler_update_basis = val_loss if isinstance(self.scheduler,
+                        torch.optim.lr_scheduler.ReduceLROnPlateau) else None
                 self.scheduler.step(scheduler_update_basis)
 
-                epoch_dict = {'epoch': epoch, 'train_loss': train_loss, 'val_loss': val_loss} | train_metrics_dict | val_metrics_dict
-                checkpoint_dict = {'epoch': epoch, 'model': self.model,
-                        'optimizer': self.optimizer, 'scheduler': self.scheduler}
+                epoch_dict = {
+                        'epoch': epoch,
+                        'train_loss': train_loss,
+                        'val_loss': val_loss,
+                } | train_metrics_dict | val_metrics_dict
+                checkpoint_dict = {
+                        'epoch': epoch,
+                        'model': self.model,
+                        'optimizer': self.optimizer,
+                        'scheduler': self.scheduler,
+                }
                 # log and update best metrics
-                checkpoint_dict, save_filename_list = self.log(checkpoint_dict, epoch_dict)
-                if save_filename_list != []:
-                    for s in save_filename_list:
+                checkpoint_dict, filename_list = self.log(checkpoint_dict, epoch_dict)
+                if filename_list != []:
+                    for filename in filename_list:
                         models.model_base.save_checkpoint(
-                                os.path.join(self.save_dir, s),
+                                os.path.join(self.save_dir, filename),
                                 **checkpoint_dict,
                         )
                 if epoch % 20 == 0:
-                    checkpoint_filename = 'epoch_{}.pth'.format(epoch)
+                    filename = 'epoch_{}.pth'.format(epoch)
                     models.model_base.save_checkpoint(
-                            os.path.join(self.save_dir, 'checkpoints', checkpoint_filename),
+                            os.path.join(self.save_dir, 'checkpoints', filename),
                             **checkpoint_dict,
                     )
 
     def iterate_dataloader(self, phase, dataloader):
         mean_loss = 0.  # mean for epoch
-        metric = criteria.metric.PrecisionRecall(phase, self.config['model_args']['classes'])
+        metric = criteria.metric.PrecisionRecall(phase,
+                self.config['model_args']['classes'])
         for batch in tqdm(dataloader, disable=self.disable_tqdm):
             img, label = batch
             img = img.to(self.device, dtype=torch.float, non_blocking=True)
@@ -130,7 +140,8 @@ class Training:
         return mean_loss, metric_dict
 
     def __load_checkpoint(self):
-        checkpoint_dict = models.model_base.load_checkpoint(self.config['load_checkpoint'])
+        checkpoint_dict = models.model_base.load_checkpoint(
+                self.config['load_checkpoint'])
         self.start_epoch = checkpoint_dict['epoch'] + 1
         self.optimizer.load_state_dict(checkpoint_dict['optimizer_state_dict'])
         self.scheduler.load_state_dict(checkpoint_dict['scheduler_state_dict'])
