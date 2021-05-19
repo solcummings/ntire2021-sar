@@ -2,6 +2,7 @@ __pycache__/
 ntire2021/data/source/
 ntire2021/labs/
 ntire2021/results/
+ntire2021/notebooks/
 
 *.swp
 *.pth
