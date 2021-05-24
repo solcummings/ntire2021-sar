@@ -5,12 +5,12 @@ Solution for the NTIRE 2021 Multi-modal Aerial View Object Classification Challe
 The objective of the challenge is to classify SAR image chips of vehicles into 10 classes. The MobileNet family of architectures are experimented with due to limitations in VRAM and time constraints.
 
 ### Methodology
-1. Addressing low resolution inputs
+1. Addressing low resolution inputs  
 SAR image chips have variable lengths of 54 to 60 pixels per side; small image sizes limit the amount of information that each image chip contains. Accuracy on small targets decreases when inputs are downsampled early on in networks, thus the stride of the convolutional layer within the stem block is changed from two to one.
-2. Addressing limited dataset size
+2. Addressing limited dataset size  
 The dataset consists of samples that are alike, which limit the intraclass variation. To compensate, networks are pretrained on ImageNet. However, the stem block is excluded from pretraining due to the difference in stride and the inputs having a single channel as opposed to three.
 A center-preserving Cutmix modification coined **Central Cutmix** is employed alongside traditional flipping and rotations to introduce variation during training.
-3. Addressing class imbalance
+3. Addressing class imbalance  
 The classes within the dataset exhibit a large imbalance, where the majority of samples are from the "sedan" class. To ensure balanced performace, all classes are under-sampled to approximately 1400 samples during training, which is approximately 80% of the number of "box truck" samples.
 
 ### Results
