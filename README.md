@@ -2,11 +2,12 @@
 Solution for the NTIRE 2021 Multi-modal Aerial View Object Classification Challenge - Track 1 (SAR) at CVPRW 2021
 
 ## Overview
-The objective of the challenge is to classify SAR image chips of vehicles into 10 classes. The MobileNet family of architectures are experimented with due to limitations in VRAM and time constraints.
+Recent advancemenets in deep learning have allowed for efficient and accurate classification of electro-optical (EO) images. However, classification of synthetic-aperature radar (SAR) images lag in accuracy. The objective of the challenge is to classify SAR image chips of vehicles into 10 classes, and this work showcases the strategies used to boost performance.
+![Dataset Overview](./examples/sar_eo_dataset_overview.png)
 
 ### Methodology
 1. Addressing low resolution inputs  
-SAR image chips have variable lengths of 54 to 60 pixels per side; small image sizes limit the amount of information that each image chip contains. Accuracy on small targets decreases when inputs are downsampled early on in networks, thus the stride of the convolutional layer within the stem block is changed from two to one.
+The SAR image chips from the dataset have variable lengths of 54 to 60 pixels per side; small image sizes limit the amount of information that each image chip contains. Accuracy on small targets decreases when inputs are downsampled early on in networks, thus the stride of the convolutional layer within the stem block is changed from two to one.
 2. Addressing limited dataset size  
 The dataset consists of samples that are alike, which limit the intraclass variation. To compensate, networks are pretrained on ImageNet. However, the stem block is excluded from pretraining due to the difference in stride and the inputs having a single channel as opposed to three.
 A center-preserving Cutmix modification coined **Central Cutmix** is employed alongside traditional flipping and rotations to introduce variation during training.
@@ -14,7 +15,7 @@ A center-preserving Cutmix modification coined **Central Cutmix** is employed al
 The classes within the dataset exhibit a large imbalance, where the majority of samples are from the "sedan" class. To ensure balanced performace, all classes are under-sampled to approximately 1400 samples during training, which is approximately 80% of the number of "box truck" samples.
 
 ### Results
-|MobileNet|Cutmix|Central cutmix|Stem stride=1|Cosine annealing|Accuracy valid data|Accuracy test data|
+|MobileNet|Cutmix|Central cutmix|Stem stride=1|Cosine annealing|Accuracy <br />valid data|Accuracy <br />test data|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |V2|||||15.58||
 |V2|x||||16.88||
