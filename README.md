@@ -3,16 +3,21 @@ Solution for the NTIRE 2021 Multi-modal Aerial View Object Classification Challe
 
 ## Overview
 Recent advancemenets in deep learning have allowed for efficient and accurate classification of electro-optical (EO) images. However, classification of synthetic-aperature radar (SAR) images lag in accuracy. The objective of the challenge is to classify SAR image chips of vehicles into 10 classes, and this work showcases the strategies used to boost performance.
-![Dataset Overview](./examples/sar_eo_dataset_overview.png)
 
 ### Methodology
 1. Addressing low resolution inputs  
 The SAR image chips from the dataset have variable lengths of 54 to 60 pixels per side; small image sizes limit the amount of information that each image chip contains. Accuracy on small targets decreases when inputs are downsampled early on in networks, thus the stride of the convolutional layer within the stem block is changed from two to one.
+![Dataset Overview](./examples/sar_eo_dataset_overview.png)
+
 2. Addressing limited dataset size  
 The dataset consists of samples that are alike, which limit the intraclass variation. To compensate, networks are pretrained on ImageNet. However, the stem block is excluded from pretraining due to the difference in stride and the inputs having a single channel as opposed to three.
+![Intraclass Similarity](./examples/intraclass.png)
 A center-preserving Cutmix modification coined **Central Cutmix** is employed alongside traditional flipping and rotations to introduce variation during training.
+![Cutmix Comparison](./examples/cutmix.png)
+
 3. Addressing class imbalance  
-The classes within the dataset exhibit a large imbalance, where the majority of samples are from the "sedan" class. To ensure balanced performace, all classes are under-sampled to approximately 1400 samples during training, which is approximately 80% of the number of "box truck" samples.
+The classes within the dataset exhibit a large imbalance, where the majority of samples are from the "sedan" class. To ensure a balanced performace, classes are under-sampled to approximately 1400 samples per class during training, which is approximately 80% of the number of "box truck" samples.
+![Class Frequency](./examples/frequency_graph.png)
 
 ### Results
 |MobileNet|Cutmix|Central cutmix|Stem stride=1|Cosine annealing|Accuracy <br />valid data|Accuracy <br />test data|
@@ -36,19 +41,19 @@ The classes within the dataset exhibit a large imbalance, where the majority of 
 
 ### Downloading and Preprocessing Data
 
-```
+```bash
 cd ./setup/
 bash setup.bash
 ```
 ### Training
-```
+```bash
 cd ./ntire2021/
 python train.py
 ```
 - changing the save_dir path in config_train.yml allows for changing the location of the directory that the newly trained model will be saved to
 
 ### Predicting
-```
+```bash
 cd ./ntire2021/
 python predict.py
 ```
