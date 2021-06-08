@@ -38,7 +38,7 @@ instantiation arguments for model
 instantiation arguments for train dataset  
 batch_size, shuffle, and num_workers used in pytorch's dataloader
 - *val_dataset_args* (dict)  
-instantiation arguments for validation dataset
+instantiation arguments for validation dataset  
 batch_size, shuffle, and num_workers used in pytorch's dataloader
 - *loss_name* (str)  
 loss function to instantiate
