@@ -30,15 +30,15 @@ maximum number of epochs
 file path to checkpoint to continue off of
 - *save_dir* (str)  
 directory path to save to
-- *model_name* (str) / *model_args* (dict)  
-model to instantiate / instantiation arguments for model
-- *train_dataset_args* (dict) / *val_dataset_args* (dict)  
-instantiation arguments for train / validation dataset  
+- *model_name* (str) | *model_args* (dict)  
+model to instantiate | instantiation arguments for model
+- *train_dataset_args* (dict) | *val_dataset_args* (dict)  
+instantiation arguments for train | validation dataset  
 batch_size, shuffle, and num_workers used in pytorch's dataloader
-- *loss_name* (str) / *loss_args* (dict)  
-loss function to instantiate / instantiation arguments for loss function
-- *optimizer_name* (str) / *optimizer_args* (dict)  
-optimizer to instantiate / instantiation arguments for optimizer
-- *scheduler_name* (str) / *scheduler_args* (dict)  
-learning rate scheduler to instantiate / instantiation arguments for learning rate scheduler
+- *loss_name* (str) | *loss_args* (dict)  
+loss function to instantiate | instantiation arguments for loss function
+- *optimizer_name* (str) | *optimizer_args* (dict)  
+optimizer to instantiate | instantiation arguments for optimizer
+- *scheduler_name* (str) | *scheduler_args* (dict)  
+learning rate scheduler to instantiate | instantiation arguments for learning rate scheduler
 
