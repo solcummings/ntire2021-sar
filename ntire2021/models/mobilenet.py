@@ -11,7 +11,7 @@ class MobileNet(nn.Module, InitializationMixin):
     MobileNet v2 and v3
 
     MobileNet v2 from arXiv:1801.04381 MobileNetV2: Inverted Residuals and Linear
-    Bottlenecks.
+    Bottlenecks
 
     MobileNet v3 from arXiv:1905.02244 Searching for MobileNetV3
 
@@ -27,19 +27,17 @@ class MobileNet(nn.Module, InitializationMixin):
         List must be [[kernel, mid_channels, out_channels, se, activation, stride]]
     arch_config: dict
         Further configurations for blocks.
-        Default = {norm: nn.BatchNorm2d}
+        Default = {width: 1., stem_downsample: True, norm: nn.BatchNorm2d}
     pretrained: bool or str
-        True pretrains using torchvision.models.mobilenet_v2
-        Will not pretrain for v3
+        True pretrains using torchvision.models.mobilenet_${version}
         Path loads the state_dict from a file.
 
     Notes
     -----
-    MobileNet v1 arXiV:1704.04861 MobileNets: Efficient Convolutional Neural Networks for
+    MobileNet v1 arXiv:1704.04861 MobileNets: Efficient Convolutional Neural Networks for
     Mobile Vision Applications
     MobileNet v2 arXiv:1801.04381 MobileNetV2: Inverted Residuals and Linear Bottlenecks.
     MobileNet v3 arXiv:1905.02244 Searching for MobileNetV3
-
     """
     def __init__(self, classes, img_channels, version, arch_config=None,
             pretrained=False):
