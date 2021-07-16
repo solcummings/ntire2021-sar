@@ -1,8 +1,8 @@
 # Improving Training Strategies for SAR Image Classification
 3rd place solution for the NTIRE 2021 Multi-modal Aerial View Object Classification Challenge - Track 1 (SAR) at CVPRW 2021  
-[[Challenge Site]](https://competitions.codalab.org/competitions/28123)
-[[Challenge Paper]](https://openaccess.thecvf.com/content/CVPR2021W/NTIRE/papers/Liu_NTIRE_2021_Multi-Modal_Aerial_View_Object_Classification_Challenge_CVPRW_2021_paper.pdf)
-[[Challenge Award]](https://data.vision.ee.ethz.ch/cvl/ntire21/NTIRE2021awards_certificates.pdf#page=27)
+[[Challenge Site]](https://competitions.codalab.org/competitions/28123) 
+[[Challenge Paper]](https://arxiv.org/abs/2107.01189) 
+[[Challenge Award]](https://data.vision.ee.ethz.ch/cvl/ntire21/NTIRE2021awards_certificates.pdf#page=27) 
 
 ## Overview
 Recent advancemenets in deep learning have allowed for efficient and accurate classification of electro-optical (EO) images. However, classification of synthetic-aperature radar (SAR) images lag in accuracy. The objective of the challenge is to classify SAR image chips of vehicles into 10 classes, and this work showcases the strategies used to boost performance.
