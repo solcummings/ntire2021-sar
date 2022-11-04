@@ -71,12 +71,12 @@ python predict.py
 ## Citation
 If you find this work useful in your research or publication, please cite this work:
 ```TeX
-@misc{liu2021_nti,
-      title={NTIRE 2021 Multi-modal Aerial View Object Classification Challenge},
-      author={Jerrick Liu and Nathan Inkawhich and Oliver Nina and Radu Timofte and Sahil Jain and Bob Lee and Yuru Duan and Wei Wei and Lei Zhang and Songzheng Xu and Yuxuan Sun and Jiaqi Tang and Xueli Geng and Mengru Ma and Gongzhe Li and Xueli Geng and Huanqia Cai and Chengxue Cai and Sol Cummings and Casian Miron and Alexandru Pasarica and Cheng-Yen Yang and Hung-Min Hsu and Jiarui Cai and Jie Mei and Chia-Ying Yeh and Jenq-Neng Hwang and Michael Xin and Zhongkai Shangguan and Zihe Zheng and Xu Yifei and Lehan Yang and Kele Xu and Min Feng},
-      year={2021},
-      eprint={2107.01189},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{liu2021_nti,
+  author={Liu, Jerrick and Inkawhich, Nathan and Nina, Oliver and Timofte, Radu and Jain, Sahil and Lee, Bob and Duan, Yuru and Wei, Wei and Zhang, Lei and Xu, Songzheng and Sun, Yuxuan and Tang, Jiaqi and Geng, Xueli and Ma, Mengru and Li, Gongzhe and Geng, Xueli and Cai, Huanqia and Cai, Chengxue and Cummings, Sol and Miron, Casian and Pasarica, Alexandru and Yang, Cheng-Yen and Hsu, Hung-Min and Cai, Jiarui and Mei, Jie and Yeh, Chia-Ying and Hwang, Jenq-Neng and Xin, Michael and Shangguan, Zhongkai and Zheng, Zihe and Yifei, Xu and Yang, Lehan and Xu, Kele and Feng, Min},
+  title={NTIRE 2021 Multi-modal Aerial View Object Classification Challenge},
+  publisher={arXiv},
+  year={2021},
+  doi={10.48550/ARXIV.2107.01189},
+  url={https://arxiv.org/abs/2107.01189},
 }
 ```
